@@ -59,9 +59,9 @@ The modal should support:
 Let implementation details be decided by the codebase/framework, but keep this user experience.
 
 ## Content source
-Use the current `kekrilo.gr` / `kekrilo.wordpress.com` content as the initial seed content.
+Use the current `kekrilo.gr` / `kekrilo.wordpress.com` content only as a migration source. The finished site must be standalone and must not depend on WordPress at runtime, because the old WordPress site may be deleted after migration.
 
-Prefer fetching/source-checking through the WordPress.com public API rather than scraping `kekrilo.gr` directly. The custom domain can return TLS/403 issues to command-line fetches, while the WordPress.com API is clean and structured:
+Prefer source-checking through the WordPress.com public API rather than scraping `kekrilo.gr` directly. The custom domain can return TLS/403 issues to command-line fetches, while the WordPress.com API is clean and structured:
 
 - Posts: `https://public-api.wordpress.com/wp/v2/sites/kekrilo.wordpress.com/posts?per_page=...&_embed=1`
 - Events category: `categories=924`
@@ -69,6 +69,8 @@ Prefer fetching/source-checking through the WordPress.com public API rather than
 - Categories: `https://public-api.wordpress.com/wp/v2/sites/kekrilo.wordpress.com/categories?per_page=100`
 
 Use API fields such as `title.rendered`, `date`, `link`, `excerpt.rendered`, `content.rendered`, `featured_media`, and `_embedded["wp:featuredmedia"][0].source_url`. Normalize HTML entities and strip/clean WordPress markup where needed before placing content into static data files.
+
+Download featured images and embedded post images into the repo under `public/content/...`, then rewrite generated data and modal HTML to local paths. Publications and Events should keep image and text fields separate: card image in `image`, full body in `contentHtml`.
 
 If an item has no featured image, keep the same card structure and use a polished fallback visual instead of changing the layout.
 

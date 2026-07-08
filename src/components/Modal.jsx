@@ -56,12 +56,14 @@ export function Modal({ item, onClose }) {
 
           <div
             className="modal-content"
-            dangerouslySetInnerHTML={{ __html: item.content || "<p>Το πλήρες κείμενο θα προστεθεί σύντομα.</p>" }}
+            dangerouslySetInnerHTML={{
+              __html: item.contentHtml || "<p>Το πλήρες κείμενο θα προστεθεί σύντομα.</p>"
+            }}
           />
 
           <div className="modal-actions">
-            {item.link ? (
-              <a href={item.link} target="_blank" rel="noreferrer">
+            {item.sourceUrl ? (
+              <a href={item.sourceUrl} target="_blank" rel="noreferrer">
                 Άνοιγμα πηγής
               </a>
             ) : null}

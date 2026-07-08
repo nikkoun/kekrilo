@@ -34,5 +34,15 @@ export default [
         version: "detect"
       }
     }
+  },
+  {
+    files: ["scripts/**/*.mjs"],
+    languageOptions: {
+      ecmaVersion: 2022,
+      globals: {
+        ...globals.node,
+        fetch: "readonly"
+      }
+    }
   }
 ];

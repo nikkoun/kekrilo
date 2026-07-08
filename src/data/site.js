@@ -31,11 +31,3 @@ export const site = {
     { label: "Επικοινωνία", href: "#contact" }
   ]
 };
-
-export const wordpress = {
-  baseUrl: "https://public-api.wordpress.com/wp/v2/sites/kekrilo.wordpress.com",
-  categories: {
-    publications: 6270,
-    events: 924
-  }
-};
