@@ -1,13 +1,14 @@
-import { useEffect, useRef } from "react";
+import React, { useEffect, useRef } from "react";
 
 export function Modal({ item, onClose }) {
+  const panelRef = useRef(null);
   const closeRef = useRef(null);
 
   useEffect(() => {
     if (!item) return;
 
     const previousFocus = document.activeElement;
-    closeRef.current?.focus();
+    panelRef.current?.focus();
     document.body.classList.add("modal-open");
 
     function handleKeyDown(event) {
@@ -30,10 +31,12 @@ export function Modal({ item, onClose }) {
   return (
     <div className="modal-backdrop" onMouseDown={onClose}>
       <article
+        ref={panelRef}
         className="modal-panel"
         role="dialog"
         aria-modal="true"
         aria-labelledby="modal-title"
+        tabIndex="-1"
         onMouseDown={(event) => event.stopPropagation()}
       >
         <div className="modal-media">

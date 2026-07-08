@@ -1,3 +1,5 @@
+import React from "react";
+
 export function ContentCard({ item, onOpen }) {
   return (
     <button className="content-card" type="button" onClick={() => onOpen(item)}>

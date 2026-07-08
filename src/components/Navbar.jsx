@@ -1,3 +1,4 @@
+import React from "react";
 import { site } from "../data/site";
 
 export function Navbar() {
