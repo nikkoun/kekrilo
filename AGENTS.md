@@ -43,6 +43,14 @@ When a user clicks a publication or event card, open a **popup / modal / overlay
 
 Publications and Events should share the same reusable card structure. Each card should be image-led: one image or fallback visual with the title overlaid on top. Keep card text minimal and show the full fetched/seeded text inside the modal after click.
 
+Keep the on-page grids simple and bounded as the archive grows:
+
+- Show cards in batches of 12 per section.
+- On desktop, the intended layout is 4 columns by 3 rows.
+- Use previous/next pagination controls below the grid.
+- Do not add search or filters unless explicitly requested.
+- Pagination should swap cards in place and preserve the single-page feel.
+
 The modal should support:
 
 - Title
@@ -55,6 +63,8 @@ The modal should support:
 - Escape key close
 - Click-outside close
 - Accessible focus handling if practical
+- Long content must scroll inside the modal body, not crop or force the whole page to scroll.
+- The modal should open at the top of the content, not auto-scroll to the close button or bottom actions.
 
 Let implementation details be decided by the codebase/framework, but keep this user experience.
 
@@ -172,11 +182,13 @@ Suggested components:
 - `Publications`
 - `Events`
 - `Contact`
-- `Card`
+- `Card` / `ContentCard`
 - `Modal`
 - `SectionHeader`
 - `Navbar`
 - `Footer`
+
+Current implementation note: publications and events share `CardGridSection`, `ContentCard`, and `Modal`. Keep future changes reusable across both content types unless there is a strong reason to diverge.
 
 Do not hardcode everything directly in one giant component unless the repo is extremely small. Keep it clean.
 
@@ -187,6 +199,7 @@ Do not hardcode everything directly in one giant component unless the repo is ex
 - Smooth scrolling navigation
 - Sticky or floating nav if it fits
 - Publications and events as card grids
+- Publications and events paginated in simple 12-card batches
 - Modal overlays for details
 - Good hover states
 - Subtle animation is allowed
