@@ -221,12 +221,31 @@ img {
 }
 
 .hero {
+  position: relative;
+  isolation: isolate;
   min-height: calc(100svh - 72px);
   display: grid;
   grid-template-columns: minmax(0, 1.03fr) minmax(320px, 0.78fr);
   align-items: center;
   gap: 64px;
   padding-top: 48px;
+}
+
+.hero::before {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  inset: -96px calc((100vw - 100%) / -2) 0;
+  background:
+    linear-gradient(90deg, rgba(var(--bg-rgb), 0.94) 0%, rgba(var(--bg-rgb), 0.62) 42%, rgba(var(--bg-rgb), 0.04) 100%),
+    linear-gradient(180deg, rgba(var(--bg-soft-rgb), 0.18), rgba(var(--bg-rgb), 0.4)),
+    url("/hero-background.png") center right / cover no-repeat;
+  opacity: 0.96;
+  pointer-events: none;
+}
+
+html[data-theme="dark"] .hero::before {
+  opacity: 0.68;
 }
 
 .eyebrow {
@@ -321,36 +340,6 @@ h1 {
   inset: -35% -20% auto;
   height: 16rem;
   background: radial-gradient(circle, rgba(var(--accent-rgb), 0.32), transparent 60%);
-}
-
-.console-bar {
-  position: relative;
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  padding: 14px;
-  border-bottom: 1px solid var(--line);
-}
-
-.console-bar span {
-  width: 10px;
-  height: 10px;
-  border-radius: 999px;
-  background: rgba(var(--text-rgb), 0.22);
-}
-
-.console-bar span:first-child {
-  background: var(--accent);
-}
-
-.console-bar kbd {
-  margin-left: auto;
-  border: 1px solid var(--line);
-  border-radius: 6px;
-  padding: 4px 7px;
-  background: rgba(var(--bg-rgb), 0.42);
-  color: var(--muted);
-  font-size: 0.78rem;
 }
 
 .console-list {

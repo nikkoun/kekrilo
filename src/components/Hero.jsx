@@ -16,12 +16,6 @@ export function Hero() {
       </div>
 
       <div className="hero-console" aria-label="Σύνοψη δράσεων ΚΕ.ΚΡΗ.ΛΟ">
-        <div className="console-bar">
-          <span />
-          <span />
-          <span />
-          <kbd>⌘ K</kbd>
-        </div>
         <div className="console-list">
           <div>
             <span>01</span>
