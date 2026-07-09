@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { About } from "./components/About";
 import { CardGridSection } from "./components/CardGridSection";
 import { Contact } from "./components/Contact";
@@ -11,14 +11,26 @@ import { publications } from "./data/publications";
 
 function App() {
   const [selectedItem, setSelectedItem] = useState(null);
+  const [theme, setTheme] = useState(() => {
+    if (typeof window === "undefined") return "light";
+    return window.localStorage.getItem("theme") === "dark" ? "dark" : "light";
+  });
 
   const closeModal = useCallback(() => setSelectedItem(null), []);
+  const toggleTheme = useCallback(() => {
+    setTheme((currentTheme) => (currentTheme === "dark" ? "light" : "dark"));
+  }, []);
+
+  useEffect(() => {
+    document.documentElement.dataset.theme = theme;
+    window.localStorage.setItem("theme", theme);
+  }, [theme]);
 
   return (
     <>
       <div className="page-glow page-glow-one" />
       <div className="page-glow page-glow-two" />
-      <Navbar />
+      <Navbar theme={theme} onToggleTheme={toggleTheme} />
       <main>
         <Hero />
         <About />
